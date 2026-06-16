@@ -1,9 +1,11 @@
-"use client";
+const fs = require('fs');
+
+const skillsContent = `"use client";
 
 import { motion } from "framer-motion";
 import { FaReact, FaNodeJs, FaPython, FaAws, FaDocker, FaGithub, FaDatabase, FaJava, FaPhp } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiTailwindcss, SiJavascript, SiDjango, SiSpringboot, SiMysql, SiMongodb, SiOpenai } from "react-icons/si";
- 
+import { GitBrand } from "lucide-react"; 
 
 const allSkills = [
   { name: "React", bg: "hover:shadow-[0_0_20px_rgba(97,218,251,0.3)]", icon: <FaReact className="text-[#61DAFB] w-8 h-8 group-hover:scale-110 transition-transform" /> },
@@ -61,7 +63,7 @@ export default function Skills() {
                 delay: index * 0.05
               }}
               whileHover={{ y: -10, scale: 1.05 }}
-              className={`group flex flex-col items-center justify-center p-6 bg-card border border-border rounded-3xl hover:border-primary/50 transition-all cursor-pointer ${skill.bg} backdrop-blur-sm w-[120px] md:w-[150px] h-[120px] md:h-[150px]`}
+              className={\`group flex flex-col items-center justify-center p-6 bg-card border border-border rounded-3xl hover:border-primary/50 transition-all cursor-pointer \${skill.bg} backdrop-blur-sm w-[120px] md:w-[150px] h-[120px] md:h-[150px]\`}
             >
               <div className="mb-4">
                 {skill.icon}
@@ -76,3 +78,7 @@ export default function Skills() {
     </section>
   );
 }
+`;
+
+fs.writeFileSync('src/components/sections/Skills.tsx', skillsContent);
+console.log('Skills replaced');
