@@ -37,10 +37,10 @@ export default function Navbar() {
       />
       <header className="fixed top-6 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
         <motion.div
-           initial={{ y: -100, opacity: 0 }}
-           animate={{ y: 0, opacity: 1 }}
-           transition={{ type: "spring" as const, stiffness: 100, damping: 20 }}
-           className={"flex items-center justify-between w-full max-w-4xl px-6 py-3 rounded-full border transition-all duration-500 pointer-events-auto " + (isScrolled ? "bg-background/80 backdrop-blur-xl border-border shadow-lg" : "bg-background/40 backdrop-blur-md border-border")}
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring" as const, stiffness: 100, damping: 20 }}
+          className={"flex items-center justify-between w-full max-w-4xl px-6 py-3 rounded-full border transition-all duration-500 pointer-events-auto " + (isScrolled ? "bg-background/80 backdrop-blur-xl border-border shadow-lg" : "bg-background/40 backdrop-blur-md border-border")}
         >
           {/* Logo removed per request */}
 
@@ -57,7 +57,7 @@ export default function Navbar() {
               </Magnetic>
             ))}
           </nav>
-          
+
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
             <Magnetic>

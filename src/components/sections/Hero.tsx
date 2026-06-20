@@ -21,7 +21,7 @@ export default function Hero() {
 
       <motion.div 
         style={{ y, opacity }}
-        className="container mx-auto px-4 md:px-6 relative z-10 font-[family-name:var(--font-space)] -mt-16 md:mt-0"
+        className="container mx-auto px-4 md:px-6 relative z-10 font-[family-name:var(--font-space)] mt-8 md:mt-0"
       >
         <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
           
