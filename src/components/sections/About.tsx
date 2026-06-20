@@ -80,7 +80,7 @@ function OrbitingNode({
 
 function TechGlobe() {
   return (
-    <div className="relative flex items-center justify-center w-full h-full min-h-[400px] overflow-hidden">
+    <div className="relative flex items-center justify-center w-full h-full min-h-[320px] md:min-h-[400px] overflow-hidden scale-75 sm:scale-90 md:scale-100 origin-center max-w-[100vw]">
       {/* Background soft glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.03)_0%,transparent_100%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_100%)]" />
       
@@ -147,8 +147,8 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-background relative border-t border-border overflow-hidden">
-      <div className="container mx-auto px-6 max-w-5xl">
+    <section id="about" className="py-12 md:py-24 bg-background relative border-t border-border overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 max-w-5xl">
 
         {/* ── Section header ── */}
         <motion.div
@@ -178,7 +178,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-2 relative flex flex-col justify-center pr-4"
+            className="md:col-span-2 relative flex flex-col justify-center md:pr-4 pr-0"
           >
             <div className="relative z-10">
               {/* Header */}
@@ -190,7 +190,7 @@ export default function About() {
                   <h3 className="text-2xl font-bold text-foreground font-[family-name:var(--font-space)] leading-tight">
                     Full Stack Developer
                   </h3>
-                  <div className="flex items-center gap-2 mt-1.5">
+                  <div className="flex flex-wrap items-center gap-2 mt-1.5">
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted border border-border text-foreground text-xs font-semibold">
                       <FaJava className="w-3.5 h-3.5 text-[#ED8B00]" /> Java Developer
                     </span>
@@ -201,26 +201,40 @@ export default function About() {
                 </div>
               </div>
 
-              <div className="space-y-4 text-muted-foreground text-sm md:text-base leading-relaxed">
-                <p>
+              <motion.div 
+                className="space-y-4 text-muted-foreground text-sm md:text-base leading-relaxed"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.15
+                    }
+                  }
+                }}
+              >
+                <motion.p variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                   I&apos;m a <span className="text-foreground font-semibold">Full Stack &amp; Java Developer</span> with
                   hands-on experience building production-grade web applications—from designing responsive UIs to
                   deploying secure, scalable backend systems.
-                </p>
-                <p>
+                </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                   At <span className="text-foreground font-semibold">Bling Square Events</span>, I built and
                   shipped real platforms used in production including{" "}
                   <span className="text-foreground font-medium">Sarvagun ERP</span> and{" "}
                   <span className="text-foreground font-medium">BlingHire</span>. I implemented secure
                   authentication, resolved critical production issues, and improved system performance end-to-end.
-                </p>
-                <p>
+                </motion.p>
+                <motion.p variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}>
                   I specialize in{" "}
                   <span className="text-foreground font-semibold">Java &amp; Spring Boot</span> on the backend and{" "}
                   <span className="text-foreground font-semibold">React.js</span> on the frontend, with growing
                   expertise in <span className="text-foreground font-semibold">LLMs &amp; RAG pipelines</span>.
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
               <motion.a
                 href="#contact"
@@ -243,7 +257,10 @@ export default function About() {
             <TechGlobe />
           </motion.div>
 
-          {/* ── Stats row (spans full width below) ── */}
+        </div>
+
+        {/* ── Stats row (spans full width below) ── */}
+        <div className="grid grid-cols-3 gap-4 mt-16 pt-8 border-t border-border">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
@@ -254,15 +271,14 @@ export default function About() {
               whileHover={{ y: -4 }}
               className="py-4 flex flex-col items-center justify-center text-center"
             >
-              <span className="text-4xl font-bold text-foreground font-[family-name:var(--font-space)] tracking-tight">
+              <span className="text-3xl md:text-4xl font-bold text-foreground font-[family-name:var(--font-space)] tracking-tight">
                 <Counter to={stat.to} suffix={stat.suffix} />
               </span>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-[0.15em] mt-2">
+              <p className="text-[10px] md:text-xs font-semibold text-muted-foreground uppercase tracking-[0.15em] mt-2">
                 {stat.label}
               </p>
             </motion.div>
           ))}
-
         </div>
       </div>
     </section>

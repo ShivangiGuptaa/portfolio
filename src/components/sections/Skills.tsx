@@ -25,12 +25,12 @@ const allSkills = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 bg-background relative border-t border-border overflow-hidden">
+    <section id="skills" className="py-12 md:py-24 bg-background relative border-t border-border overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-primary/5 blur-[150px] rounded-full" />
       </div>
 
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+      <div className="container mx-auto px-4 md:px-6 max-w-5xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,8 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-12">
+        {/* Desktop Grid */}
+        <div className="hidden md:flex flex-wrap justify-center gap-6 mt-12">
           {allSkills.map((skill, index) => (
             <motion.div
               key={index}
@@ -61,16 +62,68 @@ export default function Skills() {
                 delay: index * 0.05
               }}
               whileHover={{ y: -10, scale: 1.05 }}
-              className={`group flex flex-col items-center justify-center p-6 bg-card border border-border rounded-3xl hover:border-primary/50 transition-all cursor-pointer ${skill.bg} backdrop-blur-sm w-[120px] md:w-[150px] h-[120px] md:h-[150px]`}
+              className={`group flex flex-col items-center justify-center p-6 bg-card border border-border rounded-3xl hover:border-primary/50 transition-all cursor-pointer ${skill.bg} backdrop-blur-sm w-[150px] h-[150px]`}
             >
-              <div className="mb-4">
+              <motion.div 
+                className="mb-4"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3 + index * 0.2, repeat: Infinity, ease: "easeInOut" }}
+              >
                 {skill.icon}
-              </div>
-              <span className="text-xs md:text-sm font-medium text-muted-foreground group-hover:text-foreground text-center transition-colors">
+              </motion.div>
+              <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground text-center transition-colors">
                 {skill.name}
               </span>
             </motion.div>
           ))}
+        </div>
+
+        {/* Mobile Marquee */}
+        <div className="md:hidden mt-12 w-full overflow-hidden relative flex flex-col gap-6">
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10" />
+
+          {/* Row 1 */}
+          <div className="flex overflow-hidden w-full">
+            <motion.div 
+              className="flex w-max gap-4"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+            >
+              {[...allSkills, ...allSkills].map((skill, index) => (
+                <div 
+                  key={index} 
+                  className={`flex items-center gap-3 px-5 py-3 bg-card border border-border rounded-full shadow-sm ${skill.bg}`}
+                >
+                  <div className="w-5 h-5 flex items-center justify-center">
+                    {skill.icon}
+                  </div>
+                  <span className="text-sm font-bold text-foreground whitespace-nowrap">{skill.name}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+          
+          {/* Row 2 (Reverse direction) */}
+          <div className="flex overflow-hidden w-full">
+            <motion.div 
+              className="flex w-max gap-4"
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{ duration: 150, repeat: Infinity, ease: "linear" }}
+            >
+              {[...allSkills].reverse().concat([...allSkills].reverse()).map((skill, index) => (
+                <div 
+                  key={`rev-${index}`} 
+                  className={`flex items-center gap-3 px-5 py-3 bg-card border border-border rounded-full shadow-sm ${skill.bg}`}
+                >
+                  <div className="w-5 h-5 flex items-center justify-center">
+                    {skill.icon}
+                  </div>
+                  <span className="text-sm font-bold text-foreground whitespace-nowrap">{skill.name}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

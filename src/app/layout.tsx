@@ -1,4 +1,4 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Space_Grotesk, Outfit } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/layout/SmoothScroll';
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning className='scroll-smooth'>
-      <body className={[outfit.className, spaceGrotesk.variable, 'bg-background text-foreground antialiased selection:bg-purple-500/30 cursor-none transition-colors duration-300'].join(' ')}>
+      <body className={[outfit.className, spaceGrotesk.variable, 'bg-background text-foreground antialiased selection:bg-purple-500/30 cursor-none transition-colors duration-300 overflow-x-hidden'].join(' ')}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <CustomCursor />
           <SmoothScroll>

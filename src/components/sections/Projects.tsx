@@ -4,7 +4,7 @@ import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const projects = [
   {
@@ -65,7 +65,7 @@ function ProjectCard({ project }: { project: (typeof projects)[0] }) {
       onMouseLeave={() => setHovered(false)}
       whileHover={{ y: -8, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={`relative flex-shrink-0 w-[320px] rounded-2xl border border-border bg-card overflow-hidden shadow-sm ${project.borderColor} transition-all duration-300 cursor-pointer`}
+      className={`relative flex-shrink-0 w-[280px] sm:w-[320px] rounded-2xl border border-border bg-card overflow-hidden shadow-sm ${project.borderColor} transition-all duration-300 cursor-pointer`}
       style={{
         boxShadow: hovered ? `0 20px 60px -10px ${project.glowColor}` : undefined,
       }}
@@ -188,7 +188,17 @@ function Marquee({ speed = 0.5 }: { speed?: number }) {
   const x = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
-  const CARD_WIDTH = 320 + 24; // card + gap
+  const [cardWidth, setCardWidth] = useState(320);
+
+  // Hydration-safe resize listener
+  useEffect(() => {
+    const handleResize = () => setCardWidth(window.innerWidth < 640 ? 280 : 320);
+    handleResize(); // initialize
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const CARD_WIDTH = cardWidth + 24; // card + gap
   const TOTAL = CARD_WIDTH * projects.length;
 
   useAnimationFrame((_, delta) => {
@@ -204,6 +214,8 @@ function Marquee({ speed = 0.5 }: { speed?: number }) {
       className="overflow-hidden w-full"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
     >
       {/* Left fade */}
       <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-background to-transparent z-10" />
@@ -227,14 +239,14 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 bg-background relative border-t border-border overflow-hidden"
+      className="py-12 md:py-24 bg-background relative border-t border-border overflow-hidden"
     >
       {/* Background glow */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-primary/5 blur-[100px] rounded-full" />
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="container mx-auto px-6 max-w-5xl mb-12">
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

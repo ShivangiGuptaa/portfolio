@@ -54,12 +54,12 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-background relative border-t border-border overflow-hidden">
+    <section id="experience" className="py-12 md:py-24 bg-background relative border-t border-border overflow-hidden">
       {/* Background glow */}
       <div className="pointer-events-none absolute top-40 right-0 w-[500px] h-[500px] bg-purple-500/5 blur-[120px] rounded-full" />
       <div className="pointer-events-none absolute bottom-40 left-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full" />
 
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+      <div className="container mx-auto px-4 md:px-6 max-w-5xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function Experience() {
           <div className="relative">
             {/* The Timeline Line */}
             {/* Line is 2px wide. Dot is 48px (mobile) / 56px (desktop). Centers at 24px/28px. Left pos = center - 1px = 23px/27px */}
-            <div className="absolute top-0 bottom-0 left-[23px] md:left-[27px] w-0.5 bg-gradient-to-b from-purple-500/50 via-border to-transparent" />
+            <div className="absolute top-0 bottom-0 left-[15px] md:left-[27px] w-0.5 bg-gradient-to-b from-purple-500/50 via-border to-transparent" />
 
             <div className="space-y-12">
               {experiences.map((exp, index) => (
@@ -97,15 +97,15 @@ export default function Experience() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.6, delay: index * 0.15, type: "spring", stiffness: 100 }}
-                  className="relative flex items-start gap-6 md:gap-10 group"
+                  className="relative flex items-start gap-3 md:gap-10 group"
                 >
                   {/* Timeline Dot */}
-                  <div className="relative mt-1.5 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full border-[4px] border-background bg-card shrink-0 z-10 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+                  <div className="relative mt-1.5 flex items-center justify-center w-8 h-8 md:w-14 md:h-14 rounded-full border-[4px] border-background bg-card shrink-0 z-10 transition-transform duration-300 group-hover:scale-110 shadow-sm">
                     <div className="w-3 h-3 rounded-full bg-purple-500 group-hover:shadow-[0_0_15px_4px_rgba(168,85,247,0.5)] transition-shadow duration-300" />
                   </div>
 
                   {/* Experience Card */}
-                  <div className="flex-1 p-6 md:p-8 rounded-3xl border border-border bg-card/50 hover:bg-muted/40 transition-all duration-300 group-hover:border-purple-500/30 group-hover:shadow-[0_10px_40px_-15px_rgba(168,85,247,0.1)]">
+                  <div className="flex-1 p-4 md:p-8 rounded-3xl border border-border bg-card/50 hover:bg-muted/40 transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-[1.01] group-hover:border-purple-500/30 group-hover:shadow-[0_10px_40px_-15px_rgba(168,85,247,0.1)]">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                       <div>
                         <h3 className="text-xl md:text-2xl font-bold text-foreground font-[family-name:var(--font-space)]">

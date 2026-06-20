@@ -47,8 +47,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-background relative border-t border-border">
-      <div className="container mx-auto px-6 max-w-5xl">
+    <section id="contact" className="py-12 md:py-24 bg-background relative border-t border-border overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             onSubmit={handleSubmit}
-            className="lg:col-span-3 p-8 md:p-10 rounded-3xl border border-border bg-card shadow-sm relative overflow-hidden"
+            className="lg:col-span-3 p-6 md:p-10 rounded-3xl border border-border bg-card shadow-sm relative overflow-hidden"
           >
             <div className="space-y-6">
               <motion.div 

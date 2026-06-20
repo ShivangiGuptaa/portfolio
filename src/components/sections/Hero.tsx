@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Terminal } from "lucide-react";
+import Image from "next/image";
 import Magnetic from "@/components/ui/Magnetic";
 
 export default function Hero() {
@@ -10,7 +11,7 @@ export default function Hero() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20">
+    <section id="hero" className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-background pt-24 md:pt-20">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute top-[20%] left-[20%] w-72 h-72 bg-primary/20 rounded-full blur-[100px] animate-pulse" />
@@ -20,10 +21,39 @@ export default function Hero() {
 
       <motion.div 
         style={{ y, opacity }}
-        className="container mx-auto px-6 relative z-10 font-[family-name:var(--font-space)]"
+        className="container mx-auto px-4 md:px-6 relative z-10 font-[family-name:var(--font-space)] -mt-16 md:mt-0"
       >
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
           
+          {/* Mobile Profile Image with Premium Animations */}
+          <motion.div 
+            className="md:hidden relative w-48 h-48 mb-10"
+            initial={{ opacity: 0, scale: 0.5, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
+          >
+            {/* Pulsing glow ring instead of spinning */}
+            <motion.div 
+              className="absolute -inset-4 rounded-full bg-primary/20 blur-[20px]"
+              animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            
+            {/* Floating Image Container */}
+            <motion.div 
+              className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-2xl relative z-10"
+              animate={{ y: [-5, 5, -5] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Image 
+                src="/profile.jpg" 
+                alt="Shivangi Gupta" 
+                fill 
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+          </motion.div>
           
           <motion.h1 
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 tracking-tight leading-tight"
@@ -46,27 +76,31 @@ export default function Hero() {
           </motion.p>
           
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             <Magnetic>
-              <a 
+              <motion.a 
                 href="#projects"
-                className="group flex items-center gap-2 px-8 py-4 rounded-full bg-foreground text-background font-semibold text-lg hover:bg-primary transition-all shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group flex items-center justify-center gap-2 w-[240px] px-8 py-4 rounded-full bg-foreground text-background font-semibold text-lg hover:bg-primary transition-all shadow-xl"
               >
                 View Projects
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </motion.a>
             </Magnetic>
             <Magnetic>
-              <a 
+              <motion.a 
                 href="#contact"
-                className="px-8 py-4 rounded-full border border-border bg-card/50 backdrop-blur-sm text-foreground font-semibold text-lg hover:bg-muted transition-all shadow-sm"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center justify-center w-[240px] px-8 py-4 rounded-full border border-border bg-card/50 backdrop-blur-sm text-foreground font-semibold text-lg hover:bg-muted transition-all shadow-sm"
               >
                 Contact Me
-              </a>
+              </motion.a>
             </Magnetic>
           </motion.div>
         </div>

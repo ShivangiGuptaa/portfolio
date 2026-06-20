@@ -91,15 +91,21 @@ export default function Navbar() {
           exit={{ opacity: 0, y: -20 }}
           className="fixed top-24 left-4 right-4 z-30 bg-background/95 backdrop-blur-xl border border-border rounded-3xl py-6 px-6 flex flex-col gap-6 md:hidden shadow-2xl"
         >
-          {navLinks.map((link) => (
-            <Link
+          {navLinks.map((link, i) => (
+            <motion.div
               key={link.name}
-              href={link.href}
-              className="text-lg font-medium text-foreground/80 hover:text-primary"
-              onClick={() => setMobileMenuOpen(false)}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 * i, duration: 0.3 }}
             >
-              {link.name}
-            </Link>
+              <Link
+                href={link.href}
+                className="text-lg font-medium text-foreground/80 hover:text-primary block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            </motion.div>
           ))}
           <a
             href="/resume.pdf"

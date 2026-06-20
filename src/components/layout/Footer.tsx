@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="bg-background border-t border-border pt-16 pb-8 relative overflow-hidden">
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
       
-      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <div className="container mx-auto px-4 md:px-6 max-w-6xl relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
           <div>
             <h3 className="text-2xl font-bold font-[family-name:var(--font-space)] text-foreground tracking-tight mb-2">Shivangi Gupta</h3>
